@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from drf_hal_json import views
 
-from . import models, serializers
+from . import models, serializers, permissions
 
 
 base = views.HalCreateModelMixin, viewsets.ReadOnlyModelViewSet
@@ -53,3 +53,5 @@ class EnrollmentViewSet(*base):
     '''
     queryset = models.Enrollment.objects.all()
     serializer_class = serializers.EnrollmentSerializer
+    permission_classes = (permissions.HasGeneralReadScope,
+                          permissions.HasEnrollmentsAcces)
