@@ -18,7 +18,7 @@ class HasGeneralReadScopeOrIsApiRoot(permissions.BasePermission):
 
 class HasEnrollmentsAcces(permissions.BasePermission):
     '''
-    Allows access only to clients with should be able to see enrollments.
+    Allows access only to clients which should be able to see enrollments.
     '''
 
     def has_permission(self, request, view):
