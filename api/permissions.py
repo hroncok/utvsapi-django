@@ -23,15 +23,26 @@ class HasEnrollmentsAcces(permissions.BasePermission):
             return False
 
         if 'cvut:utvs:enrollments:all' in request.auth['scope']:
+            request.auth['_everything'] = True
             return True
 
         if ('cvut:utvs:enrollments:by-role' in request.auth['scope'] and
                 'B-00000-ZAMESTNANEC' in request.auth['roles']):
+            request.auth['_everything'] = True
             return True
 
-        if ('cvut:utvs:enrollments:personal' not in request.auth['scope'] or
-                'personal_number' not in request.auth):
-            return False
+        if ('cvut:utvs:enrollments:personal' in request.auth['scope'] and
+                'personal_number' in request.auth):
+            request.auth['_everything'] = False
+            return True
 
-        # TODO fix this:
+        return False
+
+    def has_object_permission(self, request, view, obj):
+        if request.auth['_everything']:
+            return True
+
+        if request.auth['personal_number'] == getattr(obj, 'personal_number'):
+            return True
+
         return False
