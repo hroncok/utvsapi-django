@@ -37,6 +37,7 @@ class SportViewSet(*base):
     '''
     queryset = models.Sport.objects.all()
     serializer_class = serializers.SportSerializer
+    lookup_field = 'shortcut'
 
 
 class CourseViewSet(*base):

@@ -1,6 +1,6 @@
 import itertools
 
-from drf_hal_json import serializers
+from rest_framework import serializers
 
 from . import models
 
@@ -24,7 +24,7 @@ def publics(model):
 
 def serializer(model_):
     '''Get a default Serializer class for a model'''
-    class _Serializer(serializers.HalModelSerializer):
+    class _Serializer(serializers.HyperlinkedModelSerializer):
         class Meta:
             model = model_
             fields = publics(model)
@@ -35,5 +35,13 @@ DestinationSerializer = serializer(models.Destination)
 HallSerializer = serializer(models.Hall)
 TeacherSerializer = serializer(models.Teacher)
 SportSerializer = serializer(models.Sport)
-CourseSerializer = serializer(models.Course)
 EnrollmentSerializer = serializer(models.Enrollment)
+
+
+class CourseSerializer(serializers.HyperlinkedModelSerializer):
+    sport = serializers.HyperlinkedRelatedField(
+        read_only=True, view_name='sport-detail', lookup_field='shortcut')
+
+    class Meta:
+        model = models.Course
+        fields = publics(model)
