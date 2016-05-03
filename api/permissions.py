@@ -37,12 +37,3 @@ class HasEnrollmentsAcces(permissions.BasePermission):
             return True
 
         return False
-
-    def has_object_permission(self, request, view, obj):
-        if request.auth['_everything']:
-            return True
-
-        if request.auth['personal_number'] == getattr(obj, 'personal_number'):
-            return True
-
-        return False
