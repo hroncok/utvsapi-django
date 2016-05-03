@@ -1,12 +1,13 @@
 from rest_framework import viewsets
+from drf_hal_json import views
 
 from . import models, serializers
 
 
-base = viewsets.ReadOnlyModelViewSet
+base = views.HalCreateModelMixin, viewsets.ReadOnlyModelViewSet
 
 
-class DestinationViewSet(base):
+class DestinationViewSet(*base):
     '''
     API endpoint that allows destinations to be viewed.
     '''
@@ -14,7 +15,7 @@ class DestinationViewSet(base):
     serializer_class = serializers.DestinationSerializer
 
 
-class HallViewSet(base):
+class HallViewSet(*base):
     '''
     API endpoint that allows halls to be viewed.
     '''
@@ -22,7 +23,7 @@ class HallViewSet(base):
     serializer_class = serializers.HallSerializer
 
 
-class TeacherViewSet(base):
+class TeacherViewSet(*base):
     '''
     API endpoint that allows teachers to be viewed.
     '''
@@ -30,7 +31,7 @@ class TeacherViewSet(base):
     serializer_class = serializers.TeacherSerializer
 
 
-class SportViewSet(base):
+class SportViewSet(*base):
     '''
     API endpoint that allows sports to be viewed.
     '''
@@ -38,7 +39,7 @@ class SportViewSet(base):
     serializer_class = serializers.SportSerializer
 
 
-class CourseViewSet(base):
+class CourseViewSet(*base):
     '''
     API endpoint that allows courses to be viewed.
     '''
@@ -46,7 +47,7 @@ class CourseViewSet(base):
     serializer_class = serializers.CourseSerializer
 
 
-class EnrollmentViewSet(base):
+class EnrollmentViewSet(*base):
     '''
     API endpoint that allows enrollments to be viewed.
     '''

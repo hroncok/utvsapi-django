@@ -1,6 +1,6 @@
 import itertools
 
-from rest_framework import serializers
+from drf_hal_json import serializers
 
 from . import models
 
@@ -24,7 +24,7 @@ def publics(model):
 
 def serializer(model_):
     '''Get a default Serializer class for a model'''
-    class _Serializer(serializers.HyperlinkedModelSerializer):
+    class _Serializer(serializers.HalModelSerializer):
         class Meta:
             model = model_
             fields = publics(model)
