@@ -9,8 +9,9 @@ def fields(model):
 
 
 def properties(model):
-    '''Get a generator of all property names of a model'''
-    return (n for n in dir(model) if isinstance(getattr(model, n), property))
+    '''Get a generator of all property names of a model except pk'''
+    props = (n for n in dir(model) if isinstance(getattr(model, n), property))
+    return (prop for prop in props if prop != 'pk')
 
 
 def publics(model):
