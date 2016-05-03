@@ -101,6 +101,10 @@ REST_FRAMEWORK = {
     )
 }
 
+UTVSAPITOKEN = {
+    'check_token_uri': 'http://localhost:8080/token',
+    'usermap_uri': 'http://localhost:8080/user',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/

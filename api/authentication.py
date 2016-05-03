@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import authentication, exceptions
 from utvsapitoken import TokenClient
@@ -14,8 +15,7 @@ class CtuTokenAuthentication(authentication.TokenAuthentication):
     '''
 
     def authenticate_credentials(self, key):
-        c = TokenClient(check_token_uri='http://localhost:8080/token',
-                        usermap_uri='http://localhost:8080/user')
+        c = TokenClient(**getattr(settings, 'UTVSAPITOKEN', {}))
         try:
             info = c.token_to_info(key)
         except:
