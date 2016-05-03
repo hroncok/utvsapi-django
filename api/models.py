@@ -85,7 +85,7 @@ class Enrollment(models.Model):
     semester = TinyStringField()
     registration_date = models.DateTimeField()
     tour = models.BooleanField()
-    course = models.ForeignKey(Teacher, db_column='utvs')
+    course = models.ForeignKey(Course, db_column='utvs')
 
     _kos_course_code = ShortStringField(db_column='kos_kod')
     _kos_code_flag = models.BooleanField(db_column='kos_code')
