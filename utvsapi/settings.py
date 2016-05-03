@@ -91,7 +91,9 @@ DATABASES = {
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('api.permissions.HasGeneralReadScope',),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'api.permissions.HasGeneralReadScopeOrIsApiRoot',
+    ),
     'PAGE_SIZE': 20,
     'DEFAULT_PAGINATION_CLASS':
         'drf_hal_json.pagination.HalPageNumberPagination',

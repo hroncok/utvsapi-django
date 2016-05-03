@@ -1,12 +1,15 @@
 from rest_framework import permissions, exceptions
 
 
-class HasGeneralReadScope(permissions.BasePermission):
+class HasGeneralReadScopeOrIsApiRoot(permissions.BasePermission):
     '''
     Allows access only to clients with general scope.
     '''
 
     def has_permission(self, request, view):
+        if view.get_view_name() == 'Api Root':
+            return True
+
         return (
             request.auth and
             'cvut:utvs:general:read' in request.auth['scope']
