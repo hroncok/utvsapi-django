@@ -1,5 +1,6 @@
-from . import models, serializers
 from rest_framework import viewsets
+
+from . import models, serializers
 
 
 base = viewsets.ReadOnlyModelViewSet
