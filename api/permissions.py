@@ -31,6 +31,9 @@ class HasEnrollmentsAcces(permissions.BasePermission):
 
         if ('cvut:utvs:enrollments:personal' in request.auth['scope'] and
                 'personal_number' in request.auth):
+            # we should check for this in has_object_permission()
+            # but it doesn't apply for list queries
+            # so filter the queryset instead
             view.queryset = view.queryset.filter(
                 personal_number=request.auth['personal_number'])
             return True
