@@ -29,12 +29,25 @@ class Hall(models.Model):
 
 class Teacher(models.Model):
     id = models.SmallIntegerField(primary_key=True, db_column='id_lector')
-    degrees_before = StringField(db_column='title_before')
     first_name = StringField(db_column='name')
     last_name = StringField(db_column='surname')
-    degrees_after = StringField(db_column='title_behind')
     personal_number = models.IntegerField(db_column='pers_number')
     url = LongStringField()
+
+    _degrees_before = StringField(db_column='title_before')
+    _degrees_after = StringField(db_column='title_behind')
+
+    def _no_nbsp(self, f):
+        field = getattr(self, f)
+        return field if field != '&nbsp;' else None
+
+    @property
+    def degrees_before(self):
+        return self._no_nbsp('_degrees_before')
+
+    @property
+    def degrees_after(self):
+        return self._no_nbsp('_degrees_after')
 
     class Meta:
         db_table = 'v_lectors'
