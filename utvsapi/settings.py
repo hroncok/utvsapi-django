@@ -91,11 +91,14 @@ DATABASES = {
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+    'DEFAULT_PERMISSION_CLASSES': ('api.permissions.HasGeneralReadScope',),
     'PAGE_SIZE': 20,
     'DEFAULT_PAGINATION_CLASS':
         'drf_hal_json.pagination.HalPageNumberPagination',
     'DEFAULT_PARSER_CLASSES': ('drf_hal_json.parsers.JsonHalParser',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'api.authentication.CtuTokenAuthentication',
+    )
 }
 
 
