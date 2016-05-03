@@ -1,17 +1,30 @@
+import itertools
 from . import models
 from rest_framework import serializers
 
 
-def public_fields(model):
-    return tuple(
-        f.name for f in model._meta.fields if not f.name.startswith('_'))
+def fields(model):
+    '''Get a generator of all field names of a model'''
+    return (f.name for f in model._meta.fields)
 
 
-def serializer(mod):
+def properties(model):
+    '''Get a generator of all property names of a model'''
+    return (n for n in dir(model) if isinstance(getattr(model, n), property))
+
+
+def publics(model):
+    '''Get names of all public fields and properties of a model'''
+    both = itertools.chain(fields(model), properties(model))
+    return tuple(name for name in both if not name.startswith('_'))
+
+
+def serializer(model_):
+    '''Get a default Serializer class for a model'''
     class _Serializer(serializers.HyperlinkedModelSerializer):
         class Meta:
-            model = mod
-            fields = public_fields(model)
+            model = model_
+            fields = publics(model)
     return _Serializer
 
 

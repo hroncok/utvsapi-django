@@ -69,12 +69,18 @@ class Course(models.Model):
 class Enrollment(models.Model):
     id = models.SmallIntegerField(primary_key=True, db_column='id_student')
     personal_number = models.IntegerField()
-    kos_course_code = ShortStringField(db_column='kos_kod')
     semester = TinyStringField()
     registration_date = models.DateTimeField()
     tour = models.BooleanField()
-    _kos_code_flag = models.BooleanField(db_column='kos_code')
     course = models.ForeignKey(Teacher, db_column='utvs')
+
+    _kos_course_code = ShortStringField(db_column='kos_kod')
+    _kos_code_flag = models.BooleanField(db_column='kos_code')
+
+    def _get_kos_course_code(self):
+        return self._kos_course_code if self._kos_code_flag else None
+
+    kos_course_code = property(_get_kos_course_code)
 
     class Meta:
         db_table = 'v_students'
