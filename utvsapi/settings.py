@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 
 import configparser
 import os
+import sys
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +27,10 @@ SECRET_KEY = 'm14b@en=pqxsvyf(gx&@fh2(0zuw&u3b2br6##$pwjq@%am_=*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+# Hackish way to not be in debug with gunicorn
+if sys.argv[0].endswith('gunicorn'):
+    DEBUG = False
 
 ALLOWED_HOSTS = []
 
