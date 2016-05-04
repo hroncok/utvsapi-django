@@ -4,7 +4,7 @@ from drf_hal_json import views
 from . import models, serializers, permissions
 
 
-base = views.HalCreateModelMixin, viewsets.ReadOnlyModelViewSet
+base = (viewsets.ReadOnlyModelViewSet,)
 
 
 class DestinationViewSet(*base):
