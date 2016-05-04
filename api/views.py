@@ -2,9 +2,17 @@ from rest_framework import viewsets
 from drf_hal_json import views
 
 from . import models, serializers, permissions
+from .classproperty import classproperty
 
 
-base = (viewsets.ReadOnlyModelViewSet,)
+class FilterAllFieldsMixin:
+    @classproperty
+    def filter_fields(cls):
+        model = cls.serializer_class.Meta.model
+        return serializers.fields(model)
+
+
+base = (viewsets.ReadOnlyModelViewSet, FilterAllFieldsMixin)
 
 
 class DestinationViewSet(*base):

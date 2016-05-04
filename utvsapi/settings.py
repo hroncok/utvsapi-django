@@ -106,6 +106,7 @@ REST_FRAMEWORK = {
         'api.authentication.CtuTokenAuthentication',
     ),
     'URL_FIELD_NAME': 'self',
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',),
 }
 
 UTVSAPITOKEN = {
