@@ -27,12 +27,12 @@ SECRET_KEY = 'm14b@en=pqxsvyf(gx&@fh2(0zuw&u3b2br6##$pwjq@%am_=*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+ALLOWED_HOSTS = []
 
 # Hackish way to not be in debug with gunicorn
 if sys.argv[0].endswith('gunicorn'):
     DEBUG = False
-
-ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
