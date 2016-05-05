@@ -98,7 +98,7 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-        'api.permissions.HasGeneralReadScopeOrIsApiRoot',
+        'rest_framework.permissions.AllowAny',
     ),
     'PAGE_SIZE': 20,
     'DEFAULT_PAGINATION_CLASS':
@@ -107,9 +107,6 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'drf_hal_json.renderers.JsonHalRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'api.authentication.CtuTokenAuthentication',
     ),
     'URL_FIELD_NAME': 'self',
     'DEFAULT_FILTER_BACKENDS': (

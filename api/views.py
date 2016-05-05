@@ -61,5 +61,3 @@ class EnrollmentViewSet(*base):
     '''
     queryset = models.Enrollment.objects.all()
     serializer_class = serializers.EnrollmentSerializer
-    permission_classes = (permissions.HasGeneralReadScopeOrIsApiRoot,
-                          permissions.HasEnrollmentsAcces)
